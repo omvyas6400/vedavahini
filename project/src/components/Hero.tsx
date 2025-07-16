@@ -1,10 +1,43 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Users, Heart } from 'lucide-react';
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import { useNavigate } from "react-router-dom";
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-orange-50 via-cream-50 to-orange-100" id="home">
+      {/* Lotus Particles Background */}
+      <Particles
+        id="lotus-particles"
+        init={async (main) => {
+          // @ts-ignore
+          await loadFull(main);
+        }}
+        options={{
+          background: { color: "transparent" },
+          fullScreen: { enable: false },
+          fpsLimit: 30,
+          particles: {
+            number: { value: 18 },
+            shape: {
+              type: "image",
+              image: {
+                src: "/lotus.png",
+                width: 24,
+                height: 24,
+              },
+            },
+            move: { enable: true, speed: 0.4, direction: "top", outMode: "out" },
+            opacity: { value: 0.5 },
+            size: { value: 18 },
+          },
+        }}
+        className="absolute inset-0 z-0 pointer-events-none"
+      />
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <motion.div
@@ -94,12 +127,18 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
+            style={{
+              textShadow: "0 0 16px #fbbf24, 0 0 32px #f59e42",
+            }}
           >
             Welcome to
             <motion.span
               className="block bg-gradient-to-r from-orange-600 via-orange-700 to-orange-800 bg-clip-text text-transparent"
               animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
               transition={{ duration: 5, repeat: Infinity }}
+              style={{
+                filter: "drop-shadow(0 0 8px #fbbf24)",
+              }}
             >
               VedaVahini
             </motion.span>
@@ -164,6 +203,16 @@ const Hero: React.FC = () => {
             >
               <Heart className="h-5 w-5 group-hover:bounce transition-transform" />
               Donate
+            </motion.button>
+
+            <motion.button
+              className="group bg-gradient-to-r from-orange-500 to-orange-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 border-2 border-orange-300"
+              whileHover={{ scale: 1.08, y: -2, boxShadow: "0 0 24px #fbbf24" }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => navigate('/festival-calendar')}
+            >
+              <Calendar className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+              Festival Calendar
             </motion.button>
           </motion.div>
         </motion.div>

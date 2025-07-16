@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Serif', serif;
+  background: #fff9ec;
+  color: #4a2103;
+  overflow-x: hidden;
+}
+#webgl-canvas {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 1;
+}
+#fallback-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 10vh;
+}
+#fallback-content img {
+  width: 200px;
+  margin-bottom: 1rem;
+}
